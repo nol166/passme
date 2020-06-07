@@ -4,11 +4,10 @@ let special = document.getElementById("special")
 let numbers = document.getElementById("numbers")
 var generateBtn = document.querySelector('#generate');
 let cardHeader = document.querySelector(".card-header")
-let r = Math.random().toString(36).substring(7);
-
 
 const checkBoxes = [uppercase, lowercase, special, numbers]
 
+// make string of RANDOM chars given an array of chars
 const randomChars = (arr) => {
     let range = Math.floor(Math.random() * arr.length);
     let e = arr[range];
@@ -21,7 +20,7 @@ const pwOptions = () => {
     let options = {
         length: 16
     }
-
+    // look at checkboxes to determine which options should be included
     checkBoxes.forEach(box => {
         console.log(box)
         if (box.checked === true) {
@@ -51,7 +50,9 @@ const generatePW = () => {
     let result = []
     let possible = []
     let ensured = []
-    console.log(options)
+
+    // based on what options were selected generate random characters using those character sets
+    // push possible into ensured array
     if (options.special) {
         possible = possible.concat(specialCharacters);
         ensured.push(randomChars(specialCharacters));
@@ -68,7 +69,7 @@ const generatePW = () => {
         possible = possible.concat(upperCasedCharacters);
         ensured.push(randomChars(upperCasedCharacters));
     }
-
+    // loop through all possible characters and pick one, push it to the result
     for (var i = 0; i < options.length; i++) {
         var possibleChar = randomChars(possible);
         result.push(possibleChar);
@@ -78,6 +79,7 @@ const generatePW = () => {
         result[i] = ensured[i];
     }
 
+    // concat
     return result.join('');
 }
 
@@ -86,7 +88,7 @@ const writePassword = () => {
     var passwordText = document.querySelector('#password');
   
     passwordText.value = password;
-  }
+}
   
-  // Add event listener to generate button
-  generateBtn.addEventListener('click', writePassword);
+// Add event listener to generate button
+generateBtn.addEventListener('click', writePassword);
