@@ -87,7 +87,3 @@ var specialCharacters = [
     'Y',
     'Z'
   ];
-
-  moudule.exports = {
-      specialCharacters, numericCharacters, lowerCasedCharacters, upperCasedCharacters
-  }
