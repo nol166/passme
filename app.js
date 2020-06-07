@@ -4,6 +4,8 @@ let special = document.getElementById("special")
 let numbers = document.getElementById("numbers")
 var generateBtn = document.querySelector('#generate');
 let cardHeader = document.querySelector(".card-header")
+console.log("Dont Cheat! 🕵️‍♂️")
+
 
 const checkBoxes = [uppercase, lowercase, special, numbers]
 
@@ -22,7 +24,7 @@ const pwOptions = () => {
     }
     // look at checkboxes to determine which options should be included
     checkBoxes.forEach(box => {
-        console.log(box)
+        // console.log(box)
         if (box.checked === true) {
             options[box.name] = true
         } else {
@@ -30,7 +32,7 @@ const pwOptions = () => {
         }
     })
 
-    console.log(options)
+    // console.log(options)
 
     if (
     options.special === false &&
@@ -53,34 +55,38 @@ const generatePW = () => {
 
     // based on what options were selected generate random characters using those character sets
     // push possible into ensured array
-    if (options.special) {
-        possible = possible.concat(specialCharacters);
-        ensured.push(randomChars(specialCharacters));
+    try {
+        if (options.special) {
+            possible = possible.concat(specialCharacters);
+            ensured.push(randomChars(specialCharacters));
+        }
+        if (options.numbers) {
+            possible = possible.concat(numericCharacters);
+            ensured.push(randomChars(numericCharacters));
+        }
+        if (options.lowercase) {
+            possible = possible.concat(lowerCasedCharacters);
+            ensured.push(randomChars(lowerCasedCharacters));
+        }
+        if (options.uppercase) {
+            possible = possible.concat(upperCasedCharacters);
+            ensured.push(randomChars(upperCasedCharacters));
+        }
+        // loop through all possible characters and pick one, push it to the result
+        for (var i = 0; i < options.length; i++) {
+            var possibleChar = randomChars(possible);
+            result.push(possibleChar);
+        }
+    
+        for (var i = 0; i < ensured.length; i++) {
+            result[i] = ensured[i];
+        }
+    
+        // concat
+        return result.join('');
+    } catch (err) {
+        console.error(err)
     }
-    if (options.numbers) {
-        possible = possible.concat(numericCharacters);
-        ensured.push(randomChars(numericCharacters));
-    }
-    if (options.lowercase) {
-        possible = possible.concat(lowerCasedCharacters);
-        ensured.push(randomChars(lowerCasedCharacters));
-    }
-    if (options.uppercase) {
-        possible = possible.concat(upperCasedCharacters);
-        ensured.push(randomChars(upperCasedCharacters));
-    }
-    // loop through all possible characters and pick one, push it to the result
-    for (var i = 0; i < options.length; i++) {
-        var possibleChar = randomChars(possible);
-        result.push(possibleChar);
-    }
-
-    for (var i = 0; i < ensured.length; i++) {
-        result[i] = ensured[i];
-    }
-
-    // concat
-    return result.join('');
 }
 
 const writePassword = () => {
