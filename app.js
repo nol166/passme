@@ -4,7 +4,6 @@ let special = document.getElementById("special")
 let numbers = document.getElementById("numbers")
 var generateBtn = document.querySelector('#generate');
 let cardHeader = document.querySelector(".card-header")
-console.log("Dont Cheat! 🕵️‍♂️")
 
 
 const checkBoxes = [uppercase, lowercase, special, numbers]
@@ -85,7 +84,7 @@ const generatePW = () => {
         // concat
         return result.join('');
     } catch (err) {
-        console.error(err)
+        console.warn(err)
     }
 }
 
